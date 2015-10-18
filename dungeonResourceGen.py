@@ -51,10 +51,10 @@ def generatePerFrame(frameData, draw):
         pointsMap[point["pid"]] = point
     
     for triangle in frameData["triangles"]:
+        sys.stdout.write('|')
         pa = pointsMap[triangle["pa"]]
         pb = pointsMap[triangle["pb"]]
         pc = pointsMap[triangle["pc"]]
-        
         
         ''' draw base color '''
         baseA = (baseCenterX + pa["x"]*0.5*WIDTH_UNIT, baseCenterY + pa["y"]*0.5*WIDTH_UNIT)
@@ -76,7 +76,6 @@ def generateTexture(data, fn):
     draw = ImageDraw.Draw(img)
     
     for frame in data['frames']:
-        print frame
         generatePerFrame(frame, draw)
         
     img.save(fn, 'PNG')
@@ -84,12 +83,15 @@ def generateTexture(data, fn):
 
 
 if __name__ == "__main__":
-    fn = "example.json"
-    fn_out = "example_out.png"
-    f = open(fn, "r")
-    jsondata = f.readline()
-    data = json.loads(jsondata)
-    print data
-    generateTexture(data, fn_out)
+    if len(sys.argv) == 2:
+        fn = sys.argv[1]
+        fn_out = fn+'.png'
+        f = open(fn, "r")
+        jsondata = f.readline()
+        data = json.loads(jsondata)
+        #print data
+        generateTexture(data, fn_out)
+    else:
+        print "mp3 file path as parameter..."
     
     print 'DONE'
