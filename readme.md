@@ -4,7 +4,7 @@ what 'NormalMapEditor' creates.
 1024*1024->8*8 min texture-> one line base color/one line normal map ...
 
 
-
+![](./example_out.png)
 
 
 
